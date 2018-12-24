@@ -158,7 +158,7 @@ Ce formulaire contient de quoi créer les 3 champs d'un post. La première ligne
 
 Lors de l'utilisation de `useState`, 2 variables sont déclarées : la variable contenant l'état local (par exemple `post`) et une fonction (`setPost` dans l'exemple), qui remplace le traditionnel `setState` d'un composant avec classe.
 
-Le dernier composant à examiner est `App`, qui contient `addPost`. Pour conserver de la simplicité, je l'ai passé en propriété de `CreatePost`. Mais on aurait pu utilisé [un autre hook, `useContext`](https://reactjs.org/docs/hooks-reference.html#usecontext), s'évitant d'utiliser Redux dans une appli plus fournie.
+Le dernier composant à examiner est `App`, qui contient `addPost`. Pour conserver de la simplicité, je l'ai passé en propriété de `CreatePost`. Mais on aurait pu utiliser [un autre hook, `useContext`](https://reactjs.org/docs/hooks-reference.html#usecontext), s'évitant d'utiliser Redux dans une appli plus fournie.
 
 src/App.js
 ```js
@@ -196,3 +196,11 @@ const App = () => {
 
 export default App
 ```
+
+J'ai ajouté des fixtures pour avoir quelques posts à disposition et une feuille de style pour avoir ce rendu :
+
+![](https://raw.githubusercontent.com/falkodev/react-hooks/master/picture.png)
+
+On a ainsi une application qui aurait demandé auparavant des composants en classe, plus long à écrire et plus complexes. Avec la simplicité des composants en fonction, la lisibilité est meilleure et on peut gérer l'état de la même manière.
+
+Dans la deuxième partie, nous examinerons comment tester ces composants. Les sources de cette appli sont disponibles [ici](https://github.com/falkodev/react-hooks).
