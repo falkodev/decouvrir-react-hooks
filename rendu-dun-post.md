@@ -303,4 +303,6 @@ J'ai ajouté des fixtures pour avoir quelques posts à disposition et une feuill
 
 On a ainsi une application qui aurait demandé auparavant des composants en classe, plus long à écrire et plus complexes. Avec la simplicité des composants en fonction, la lisibilité est meilleure et on peut gérer l'état de la même manière.
 
+Cette fonctionnalité est encore en phase alpha de développement. L'équipe React recueille des avis, et va certainement modifier certains comportements dans les mois à venir. C'est pour cela qu'il n'est pas recommandé d'utiliser les hooks en production, ou même de refactoriser des classes en fonctions. C'est tout de même très prometteur pour avoir des applications encore plus simples à développer et maintenir.
+
 Dans la deuxième partie, nous examinerons comment tester ces composants. Les sources de cette appli sont disponibles [ici](https://github.com/falkodev/react-hooks).
