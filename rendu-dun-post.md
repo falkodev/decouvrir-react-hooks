@@ -158,7 +158,107 @@ Ce formulaire contient de quoi créer les 3 champs d'un post. La première ligne
 
 Lors de l'utilisation de `useState`, 2 variables sont déclarées : la variable contenant l'état local (par exemple `post`) et une fonction (`setPost` dans l'exemple), qui remplace le traditionnel `setState` d'un composant avec classe.
 
-Le dernier composant à examiner est `App`, qui contient `addPost`. Pour conserver de la simplicité, je l'ai passé en propriété de `CreatePost`. Mais on aurait pu utiliser [un autre hook, `useContext`](https://reactjs.org/docs/hooks-reference.html#usecontext), s'évitant d'utiliser Redux dans une appli plus fournie.
+Pour illustrer l'avantage des hooks, voici ce qu'aurait donné le même composant s'il avait été une classe :
+
+src/post/CreatePost.js
+```js
+import React from 'react'
+import PropTypes from 'prop-types'
+
+class CreatePost extends React.component => {
+  constructor(props) {
+    super(props)
+    this.state = {
+      content: '',
+      tags: [],
+      author: '',
+      message: ''
+    }
+
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  const handleInputChange = event => {
+    const { name, value } = event.target
+    this.setState({ message: '' })
+    document.getElementById('content').classList.remove('validate-fail')
+    this.setState({ [name]: value })
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    if (!this.state.content) {
+      this.setState({ message: 'Missing field content.' })
+      document.getElementById('message').classList.add('message-fail')
+      document.getElementById('content').classList.add('validate-fail')
+      return
+    }
+
+    this.setState({ tags = [this.state.tags] })
+    const post = {
+      content: this.state.content,
+      author: this.state.author,
+      tags: this.state.tags
+    }
+    props.addPost(post, props.setPosts)
+    this.setState(initialState)
+    this.setState({ message: 'Post added.' })
+    document.getElementById('message').classList.add('message-success')
+  }
+  
+  render () {
+    return (
+      <form onSubmit={handleSubmit} className="create-post">
+        <div className="create-post__content">
+          <label htmlFor="content">Content</label>
+          <textarea
+            name="content"
+            id="content"
+            value={post.content}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="create-post__tags">
+          <label htmlFor="tags">Tags</label>
+          <input
+            type="text"
+            name="tags"
+            id="tags"
+            value={post.tags}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="create-post__author">
+          <label htmlFor="author">Author</label>
+          <input
+            type="text"
+            name="author"
+            id="author"
+            value={post.author}
+            onChange={handleInputChange}
+          />
+        </div>
+        <br />
+        <input type="submit" data-testid="submit" value="Submit" />
+        <label id="message">{message}</label>
+      </form>
+    )
+  }
+}
+
+CreatePost.propTypes = {
+  content: PropTypes.string,
+  tags: PropTypes.array,
+  author: PropTypes.string,
+}
+
+export default CreatePost
+```
+
+Plus long à écrire pour le même résultat. Et encore, nous n'avons pas utilisé tous les éléments du cycle de vie d'un composant React ici (`componentDidMount`, `componentDidUpdate`, `componentWillUnmount`, et toutes les autres nouveautés). Avec les hooks, plus besoin de retenir cette litanie d'événements, ils sont déjà optimisés pour ces cas particuliers.
+
+Le dernier composant à examiner est `App`, qui contient `addPost`. Pour conserver de la simplicité, je l'ai passé en propriété de `CreatePost`. Mais on aurait pu utiliser [un autre hook, `useContext`](https://reactjs.org/docs/hooks-reference.html#usecontext), s'évitant d'utiliser Redux dans une appli plus fournie et sa cohorte de wrappers à ajouter aux classes.
 
 src/App.js
 ```js
