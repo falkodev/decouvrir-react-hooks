@@ -2,7 +2,7 @@
 
 ## Rendu et création de posts
 
-Commençons par le rendu des posts. Un post est d'un contenu, de tags et d'un auteur. Voici la structure, toute simple, dans un composant fonctionnel :
+Commençons par le rendu des posts. Un post est constitué d'un contenu, de tags et d'un auteur. Voici la structure, toute simple, dans un composant fonctionnel :
 
 src/post/RenderPost.js
 ```js
