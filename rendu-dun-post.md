@@ -1,11 +1,12 @@
-# React hooks
+# Rendu d'un post
 
 ## Rendu et création de posts
 
 Commençons par le rendu des posts. Un post est constitué d'un contenu, de tags et d'un auteur. Voici la structure, toute simple, dans un composant fonctionnel :
 
 src/post/RenderPost.js
-```js
+
+```javascript
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -33,7 +34,8 @@ export default Post
 Pour la liste des posts, nous allons faire appel à ce composant `RenderPost` et afficher 2 boutons qui serviront au tri des posts.
 
 src/post/Posts.js
-```js
+
+```javascript
 import React from 'react'
 import RenderPost from './RenderPost'
 
@@ -69,7 +71,8 @@ export default RenderPosts
 Jusque-là, rien de très complexe. La création de post va illustrer la force des hooks.
 
 src/post/CreatePost.js
-```js
+
+```javascript
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
@@ -156,12 +159,13 @@ Ce formulaire contient de quoi créer les 3 champs d'un post. La première ligne
 
 2 éléments vont faire partie de cet état : `post` et `message`. `message` sert à notifier l'utilisateur en cas d'erreur ou de succès à la soumission. `post` contient les informations remplies par l'utilisateur et structurées selon l'objet `initialState`.
 
-Lors de l'utilisation de `useState`, 2 variables sont déclarées : la variable contenant l'état local (par exemple `post`) et une fonction (`setPost` dans l'exemple), qui remplace le traditionnel `setState` d'un composant avec classe.
+Lors de l'utilisation de `useState`, 2 variables sont déclarées : la variable contenant l'état local \(par exemple `post`\) et une fonction \(`setPost` dans l'exemple\), qui remplace le traditionnel `setState` d'un composant avec classe.
 
 Pour illustrer l'avantage des hooks, voici ce qu'aurait donné le même composant s'il avait été une classe :
 
 src/post/CreatePost.js
-```js
+
+```javascript
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -206,7 +210,7 @@ class CreatePost extends React.component => {
     this.setState({ message: 'Post added.' })
     document.getElementById('message').classList.add('message-success')
   }
-  
+
   render () {
     return (
       <form onSubmit={handleSubmit} className="create-post">
@@ -256,12 +260,13 @@ CreatePost.propTypes = {
 export default CreatePost
 ```
 
-Plus long à écrire pour le même résultat. Et encore, nous n'avons pas utilisé tous les éléments du cycle de vie d'un composant React ici (`componentDidMount`, `componentDidUpdate`, `componentWillUnmount`, et toutes les autres nouveautés). Avec les hooks, plus besoin de retenir cette litanie d'événements, ils sont déjà optimisés pour ces cas particuliers.
+Plus long à écrire pour le même résultat. Et encore, nous n'avons pas utilisé tous les éléments du cycle de vie d'un composant React ici \(`componentDidMount`, `componentDidUpdate`, `componentWillUnmount`, et toutes les autres nouveautés\). Avec les hooks, plus besoin de retenir cette litanie d'événements, ils sont déjà optimisés pour ces cas particuliers.
 
 Le dernier composant à examiner est `App`, qui contient `addPost`. Pour conserver de la simplicité, je l'ai passé en propriété de `CreatePost`. Mais on aurait pu utiliser [un autre hook, `useContext`](https://reactjs.org/docs/hooks-reference.html#usecontext), s'évitant d'utiliser Redux dans une appli plus fournie et sa cohorte de wrappers à ajouter aux classes.
 
 src/App.js
-```js
+
+```javascript
 import React, { useState } from 'react'
 import CreatePost from './post/CreatePost'
 import Posts from './post/Posts'
@@ -305,4 +310,5 @@ On a ainsi une application qui aurait demandé auparavant des composants en clas
 
 Cette fonctionnalité est encore en phase alpha de développement. L'équipe React recueille des avis, et va certainement modifier certains comportements dans les mois à venir. C'est pour cela qu'il n'est pas recommandé d'utiliser les hooks en production, ou même de refactoriser des classes en fonctions. C'est tout de même très prometteur pour avoir des applications encore plus simples à développer et maintenir.
 
-Dans la deuxième partie, nous examinerons comment tester ces composants. Les sources de cette appli sont disponibles [ici](https://github.com/falkodev/react-hooks).
+Les sources de cette appli sont disponibles [ici](https://github.com/falkodev/react-hooks).
+
